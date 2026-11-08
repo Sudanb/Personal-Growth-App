@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>PERSONAL.GROWTH</title>
+<meta name="theme-color" content="#050510">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg-deep:#050510; --bg-surface:#0d0d18; --bg-elevated:#15151f; --bg-input:#0a0a14; --border:#2a2a45; --border-glow:#3a3a65; --text:#e8e8f5; --text-muted:#8888a8; --text-dim:#555575; --neon-cyan:#00f0ff; --neon-pink:#ff2a6d; --neon-violet:#c084fc; --neon-green:#39ff14; --warning:#ffb627; --error:#ff3860; --font-display:'Orbitron',ui-monospace,monospace; --font-mono:'JetBrains Mono',ui-monospace,monospace; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { background:var(--bg-deep); color:var(--text); font-family:var(--font-mono); font-size:14px; line-height:1.5; min-height:100vh; overflow-x:hidden; -webkit-font-smoothing:antialiased; -webkit-tap-highlight-color:transparent; }
+  body::before { content:''; position:fixed; inset:0; background:linear-gradient(rgba(10,10,20,0) 50%, rgba(0,0,0,0.18) 50%); background-size:100% 3px; pointer-events:none; z-index:100; mix-blend-mode:overlay; }
+  body::after { content:''; position:fixed; inset:0; background:linear-gradient(rgba(42,42,69,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(42,42,69,0.14) 1px, transparent 1px); background-size:40px 40px; pointer-events:none; z-index:-1; opacity:0.5; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; padding:16px; border-bottom:1px solid var(--border); background:linear-gradient(180deg, rgba(0,240,255,0.04), transparent); position:sticky; top:0; z-index:50; backdrop-filter:blur(8px); background-color:rgba(5,5,16,0.85); }
+  .logo { font-family:var(--font-display); font-weight:900; font-size:16px; letter-spacing:0.15em; color:var(--neon-cyan); text-shadow:0 0 12px rgba(0,240,255,0.5); }
+  .logo span { color:var(--neon-pink); text-shadow:0 0 12px rgba(255,42,109,0.5); }
+  .version { font-size:10px; color:var(--text-dim); letter-spacing:0.15em; }
+  .tabs { display:flex; gap:4px; padding:10px 12px; border-bottom:1px solid var(--border); overflow-x:auto; position:sticky; top:57px; background:var(--bg-deep); z-index:40; }
+  .tab { flex:1; min-width:72px; padding:10px 8px; background:var(--bg-surface); border:1px solid var(--border); color:var(--text-muted); font-family:var(--font-mono); font-size:10px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; cursor:pointer; transition:all 0.15s; clip-path:polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
+  .tab.active { background:linear-gradient(135deg, rgba(0,240,255,0.15), rgba(255,42,109,0.1)); color:var(--neon-cyan); border-color:var(--neon-cyan); box-shadow:0 0 14px rgba(0,240,255,0.3), inset 0 0 20px rgba(0,240,255,0.05); text-shadow:0 0 6px rgba(0,240,255,0.6); }
+  .view { display:none; padding:16px; max-width:540px; margin:0 auto; }
+  .view.active { display:block; }
+  .banner { background:linear-gradient(135deg, rgba(255,182,39,0.14), rgba(255,42,109,0.08)); border:1px solid var(--warning); padding:12px 14px; margin-bottom:16px; font-size:11px; letter-spacing:0.05em; color:var(--warning); text-shadow:0 0 8px rgba(255,182,39,0.3); line-height:1.6; }
+  .banner strong { font-weight:700; color:var(--neon-pink); }
+  .date-header { font-family:var(--font-display); font-size:22px; font-weight:700; letter-spacing:0.04em; color:var(--text); line-height:1.2; }
+  .date-sub { font-size:10px; color:var(--text-muted); letter-spacing:0.15em; text-transform:uppercase; margin-top:4px; margin-bottom:20px; }
+  .section { background:var(--bg-surface); border:1px solid var(--border); padding:16px; margin-bottom:14px; position:relative; }
+  .section::before { content:''; position:absolute; top:-1px; left:-1px; width:14px; height:14px; border-top:2px solid var(--neon-cyan); border-left:2px solid var(--neon-cyan); }
+  .section::after { content:''; position:absolute; bottom:-1px; right:-1px; width:14px; height:14px; border-bottom:2px solid var(--neon-pink); border-right:2px solid var(--neon-pink); }
+  .section-label { font-family:var(--font-display); font-size:10px; font-weight:700; letter-spacing:0.28em; color:var(--neon-cyan); margin-bottom:14px; text-transform:uppercase; display:flex; align-items:center; gap:8px; }
+  .section-label::before { content:'>'; color:var(--neon-pink); }
+  .field { margin-bottom:14px; }
+  .field:last-child { margin-bottom:0; }
+  .field-label { display:block; font-size:10px; letter-spacing:0.12em; color:var(--text-muted); margin-bottom:7px; text-transform:uppercase; }
+  .stepper { display:flex; align-items:center; border:1px solid var(--border); background:var(--bg-input); width:fit-content; user-select:none; }
+  .stepper button { width:40px; height:40px; background:transparent; border:none; color:var(--neon-cyan); font-family:var(--font-mono); font-size:18px; font-weight:700; cursor:pointer; transition:all 0.1s; }
+  .stepper button:active { background:rgba(0,240,255,0.15); text-shadow:0 0 10px rgba(0,240,255,0.8); }
+  .stepper .val { width:90px; text-align:center; padding:0 8px; font-size:15px; color:var(--text); font-weight:500; border:none; border-left:1px solid var(--border); border-right:1px solid var(--border); background:transparent; height:40px; font-family:var(--font-mono); outline:none; -moz-appearance:textfield; -webkit-appearance:none; appearance:none; }
+  .stepper .val:focus { background:rgba(0,240,255,0.05); color:var(--neon-cyan); }
+  .stepper .val::-webkit-outer-spin-button, .stepper .val::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
+  .suggested-wrap { background:linear-gradient(135deg, rgba(192,132,252,0.08), rgba(0,240,255,0.03)); border:1px solid var(--neon-violet); padding:12px 14px; }
+  .suggested-wrap .day-tag { font-size:10px; color:var(--neon-violet); letter-spacing:0.2em; display:block; margin-bottom:8px; text-transform:uppercase; font-family:var(--font-display); font-weight:700; text-shadow:0 0 6px rgba(192,132,252,0.4); }
+  .suggested-list { list-style:none; margin:0; padding:0; }
+  .suggested-list li { color:var(--text); padding:4px 0; font-family:var(--font-mono); font-size:12px; letter-spacing:0.03em; line-height:1.45; }
+  .suggested-list li::before { content:'› '; color:var(--neon-pink); }
+  .time-row { display:flex; gap:4px; align-items:center; flex-wrap:wrap; }
+  select { background:var(--bg-input); border:1px solid var(--border); color:var(--text); font-family:var(--font-mono); font-size:14px; padding:10px 28px 10px 10px; cursor:pointer; appearance:none; -webkit-appearance:none; background-image:linear-gradient(45deg, transparent 50%, var(--neon-cyan) 50%), linear-gradient(135deg, var(--neon-cyan) 50%, transparent 50%); background-position:calc(100% - 14px) center, calc(100% - 9px) center; background-size:5px 5px; background-repeat:no-repeat; min-width:62px; }
+  select:focus { outline:none; border-color:var(--neon-cyan); box-shadow:0 0 10px rgba(0,240,255,0.3); }
+  .time-sep { color:var(--neon-pink); font-weight:700; padding:0 2px; font-size:15px; }
+  input[type="text"], textarea { width:100%; background:var(--bg-input); border:1px solid var(--border); color:var(--text); font-family:var(--font-mono); font-size:13px; padding:10px 12px; transition:all 0.15s; resize:vertical; }
+  input[type="text"]:focus, textarea:focus { outline:none; border-color:var(--neon-cyan); box-shadow:0 0 10px rgba(0,240,255,0.3); }
+  .char-count { font-size:10px; color:var(--text-dim); text-align:right; margin-top:4px; letter-spacing:0.1em; }
+  .char-count.warn { color:var(--warning); }
+  .char-count.over { color:var(--error); }
+  .list-item { display:flex; gap:6px; margin-bottom:6px; align-items:stretch; }
+  .list-item input, .list-item textarea { flex:1; }
+  .list-item textarea { min-height:60px; }
+  .btn-remove { width:40px; background:transparent; border:1px solid var(--border); color:var(--neon-pink); cursor:pointer; font-family:var(--font-mono); font-size:16px; font-weight:700; flex-shrink:0; transition:all 0.1s; }
+  .btn-remove:active { border-color:var(--neon-pink); background:rgba(255,42,109,0.15); box-shadow:0 0 8px rgba(255,42,109,0.3); }
+  .btn-add { display:block; width:100%; padding:10px; background:transparent; border:1px dashed var(--border-glow); color:var(--neon-cyan); font-family:var(--font-mono); font-size:10px; letter-spacing:0.18em; cursor:pointer; margin-top:6px; text-transform:uppercase; transition:all 0.15s; }
+  .btn-add:active { border-color:var(--neon-cyan); background:rgba(0,240,255,0.08); text-shadow:0 0 6px rgba(0,240,255,0.6); }
+  .mood-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:6px; }
+  .mood-opt { padding:11px 12px; background:var(--bg-input); border:1px solid var(--border); color:var(--text-muted); font-family:var(--font-mono); font-size:12px; letter-spacing:0.08em; cursor:pointer; text-transform:uppercase; transition:all 0.1s; text-align:left; }
+  .mood-opt.selected { color:var(--neon-cyan); border-color:var(--neon-cyan); background:rgba(0,240,255,0.1); text-shadow:0 0 6px rgba(0,240,255,0.6); box-shadow:0 0 12px rgba(0,240,255,0.2); }
+  .btn-primary { width:100%; padding:15px; background:linear-gradient(135deg, var(--neon-cyan), var(--neon-pink)); border:none; color:var(--bg-deep); font-family:var(--font-display); font-size:13px; font-weight:900; letter-spacing:0.28em; cursor:pointer; text-transform:uppercase; transition:all 0.15s; clip-path:polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%); margin-top:8px; }
+  .btn-primary:active { filter:brightness(1.2); box-shadow:0 0 24px rgba(0,240,255,0.4); }
+  .derived { font-size:11px; color:var(--neon-green); letter-spacing:0.05em; margin-top:8px; text-shadow:0 0 6px rgba(57,255,20,0.3); }
+  .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(100px); background:var(--bg-elevated); border:1px solid var(--neon-cyan); padding:12px 22px; font-size:11px; letter-spacing:0.15em; color:var(--neon-cyan); text-shadow:0 0 6px rgba(0,240,255,0.6); box-shadow:0 0 24px rgba(0,240,255,0.3); opacity:0; transition:all 0.3s; z-index:200; pointer-events:none; text-transform:uppercase; }
+  .toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+  .history-item { background:var(--bg-surface); border:1px solid var(--border); padding:14px; margin-bottom:10px; cursor:pointer; transition:all 0.15s; }
+  .history-date { font-family:var(--font-display); font-size:13px; font-weight:700; color:var(--neon-cyan); letter-spacing:0.1em; }
+  .history-meta { font-size:10px; color:var(--text-dim); letter-spacing:0.08em; margin-top:4px; text-transform:uppercase; }
+  .locked-pill { display:inline-block; font-size:8px; letter-spacing:0.18em; color:var(--warning); border:1px solid var(--warning); padding:2px 6px; margin-left:8px; vertical-align:middle; }
+  .history-detail { display:none; padding:12px 0 0; margin-top:10px; border-top:1px dashed var(--border); font-size:12px; }
+  .history-detail.open { display:block; }
+  .history-detail .kv { display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px dashed rgba(42,42,69,0.5); gap:10px; }
+  .history-detail .kv:last-child { border-bottom:0; }
+  .history-detail .k { color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em; font-size:10px; min-width:100px; }
+  .history-detail .v { color:var(--text); text-align:right; word-break:break-word; flex:1; }
+  .history-detail .block { flex-direction:column; align-items:stretch; }
+  .history-detail .block .v { text-align:left; margin-top:4px; }
+  .history-detail ul { list-style:none; }
+  .history-detail li { color:var(--text); padding:2px 0; font-size:11px; }
+  .history-detail li::before { content:'› '; color:var(--neon-pink); }
+  .stat-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; margin-bottom:14px; }
+  .stat-card { background:var(--bg-surface); border:1px solid var(--border); padding:14px; position:relative; }
+  .stat-card::before { content:''; position:absolute; top:0; left:0; width:8px; height:2px; background:var(--neon-cyan); }
+  .stat-label { font-size:9px; letter-spacing:0.18em; color:var(--text-muted); text-transform:uppercase; margin-bottom:6px; }
+  .stat-value { font-family:var(--font-display); font-size:22px; font-weight:700; color:var(--neon-cyan); text-shadow:0 0 10px rgba(0,240,255,0.4); line-height:1.1; }
+  .stat-sub { font-size:10px; color:var(--text-muted); margin-top:4px; letter-spacing:0.05em; }
+  .mood-bar { display:flex; align-items:center; margin:4px 0; gap:8px; font-size:11px; }
+  .mood-bar .lbl { width:90px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; font-size:10px; }
+  .mood-bar .bar { flex:1; height:10px; background:var(--bg-input); border:1px solid var(--border); position:relative; }
+  .mood-bar .fill { position:absolute; left:0; top:0; height:100%; background:linear-gradient(90deg, var(--neon-cyan), var(--neon-pink)); box-shadow:0 0 8px rgba(0,240,255,0.4); }
+  .mood-bar .count { width:24px; text-align:right; color:var(--text); font-size:11px; }
+  .export-area { width:100%; min-height:260px; background:var(--bg-input); border:1px solid var(--border); color:var(--text); font-family:var(--font-mono); font-size:11px; padding:12px; resize:vertical; line-height:1.5; }
+  .export-controls { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+  .btn-secondary { padding:10px 14px; background:var(--bg-surface); border:1px solid var(--border); color:var(--text); font-family:var(--font-mono); font-size:10px; letter-spacing:0.18em; cursor:pointer; text-transform:uppercase; transition:all 0.1s; }
+  .btn-secondary.active { border-color:var(--neon-cyan); color:var(--neon-cyan); background:rgba(0,240,255,0.08); }
+  .empty-state { text-align:center; padding:40px 20px; color:var(--text-dim); font-size:11px; letter-spacing:0.15em; }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.55; } }
+  .pulse { animation:pulse 2.2s infinite; }
+  .footer { text-align:center; padding:24px 20px 40px; font-size:9px; color:var(--text-dim); letter-spacing:0.25em; text-transform:uppercase; }
+  @media (max-width: 380px) { .mood-grid { grid-template-columns:1fr; } .stat-grid { grid-template-columns:1fr; } .tab { font-size:9px; } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">PERSONAL<span>.</span>GROWTH</div>
+  <div class="version">// v0.4 — LOCAL</div>
+</header>
+<nav class="tabs">
+  <button class="tab active" data-view="today">TODAY</button>
+  <button class="tab" data-view="history">HISTORY</button>
+  <button class="tab" data-view="stats">STATS</button>
+  <button class="tab" data-view="export">EXPORT</button>
+</nav>
+<main>
+  <section id="view-today" class="view active">
+    <div id="banner-container"></div>
+    <div class="date-header" id="today-date">—</div>
+    <div class="date-sub" id="today-sub">—</div>
+    <form id="entry-form">
+      <div class="section">
+        <div class="section-label">VITALS</div>
+        <div class="field">
+          <label class="field-label">Weight (kg)</label>
+          <div class="stepper" data-field="weight" data-min="30" data-max="200" data-step="0.1" data-precision="1">
+            <button type="button" data-action="dec">−</button>
+            <input type="text" inputmode="decimal" class="val" value="70.0">
+            <button type="button" data-action="inc">+</button>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Sleep time (prev night)</label>
+          <div class="time-row">
+            <select id="sleep-hour"></select><span class="time-sep">:</span><select id="sleep-min"></select>
+            <select id="sleep-ampm"><option>AM</option><option selected>PM</option></select>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Wake time</label>
+          <div class="time-row">
+            <select id="wake-hour"></select><span class="time-sep">:</span><select id="wake-min"></select>
+            <select id="wake-ampm"><option selected>AM</option><option>PM</option></select>
+          </div>
+          <div class="derived" id="sleep-hours-derived">// sleep duration: —</div>
+        </div>
+        <div class="field">
+          <label class="field-label">Screentime</label>
+          <div class="time-row">
+            <select id="screen-hour"></select><span class="time-sep">h</span><select id="screen-min"></select><span class="time-sep">m</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">WORK</div>
+        <div class="field">
+          <label class="field-label">Deep-work hours</label>
+          <div class="stepper" data-field="deepWorkHours" data-min="0" data-max="16" data-step="0.5" data-precision="1">
+            <button type="button" data-action="dec">−</button>
+            <input type="text" inputmode="decimal" class="val" value="0.0">
+            <button type="button" data-action="inc">+</button>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Major work done (max 300 per item)</label>
+          <div id="majorWork-list"></div>
+          <button type="button" class="btn-add" data-add="majorWork">+ ADD WORK</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">INPUT</div>
+        <div class="field">
+          <label class="field-label">Papers read</label>
+          <div id="papers-list"></div>
+          <button type="button" class="btn-add" data-add="papers">+ ADD PAPER</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">THOUGHT</div>
+        <div class="field">
+          <label class="field-label">Ideas</label>
+          <div id="ideas-list"></div>
+          <button type="button" class="btn-add" data-add="ideas">+ ADD IDEA</button>
+        </div>
+        <div class="field">
+          <label class="field-label">Junk ideas</label>
+          <div id="junkIdeas-list"></div>
+          <button type="button" class="btn-add" data-add="junkIdeas">+ ADD JUNK IDEA</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">EXERCISE</div>
+        <div class="field">
+          <label class="field-label">Suggested for today</label>
+          <div class="suggested-wrap">
+            <span class="day-tag" id="suggested-day">—</span>
+            <ul class="suggested-list" id="suggested-list"></ul>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Distance travelled (km)</label>
+          <div class="stepper" data-field="distanceKm" data-min="0" data-max="100" data-step="0.1" data-precision="1">
+            <button type="button" data-action="dec">−</button>
+            <input type="text" inputmode="decimal" class="val" value="0.0">
+            <button type="button" data-action="inc">+</button>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Gym / exercise start time</label>
+          <div class="time-row">
+            <select id="gym-hour"></select><span class="time-sep">:</span><select id="gym-min"></select>
+            <select id="gym-ampm"><option>AM</option><option selected>PM</option></select>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Duration</label>
+          <div class="time-row">
+            <select id="dur-hour"></select><span class="time-sep">h</span><select id="dur-min"></select><span class="time-sep">m</span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Protein consumed (g)</label>
+          <div class="stepper" data-field="proteinGrams" data-min="0" data-max="400" data-step="5" data-precision="0">
+            <button type="button" data-action="dec">−</button>
+            <input type="text" inputmode="numeric" class="val" value="0">
+            <button type="button" data-action="inc">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">MIND</div>
+        <div class="field">
+          <label class="field-label">Mood</label>
+          <div class="mood-grid" id="mood-grid"></div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary" id="save-btn">// COMMIT ENTRY</button>
+    </form>
+  </section>
+  <section id="view-history" class="view">
+    <div class="date-header">HISTORY</div>
+    <div class="date-sub">// stored entries, newest first</div>
+    <div id="history-list"></div>
+  </section>
+  <section id="view-stats" class="view">
+    <div class="date-header">STATS</div>
+    <div class="date-sub" id="stats-sub">—</div>
+    <div id="stats-content"></div>
+  </section>
+  <section id="view-export" class="view">
+    <div class="date-header">EXPORT</div>
+    <div class="date-sub">// paste to Claude for month summary</div>
+    <div class="export-controls">
+      <button class="btn-secondary active" data-month="current">CURRENT</button>
+      <button class="btn-secondary" data-month="previous">PREVIOUS</button>
+      <button class="btn-secondary" id="btn-copy">COPY</button>
+    </div>
+    <textarea class="export-area" id="export-area" readonly></textarea>
+  </section>
+</main>
+<div class="footer">PERSONAL.GROWTH // LOCAL PWA // NO NETWORK</div>
+<div class="toast" id="toast">SAVED</div>
+<script>
+  const MOODS = ['perfect','happy','not bad','not great','empty','slow','indifferent','sad','angry','anxious','stressed','ill'];
+  const MINUTE_STEP = 5;
+  const EDIT_LOCK_DAYS = 2;
+  const STORAGE_KEY = 'personal_growth_v1';
+  const DAY_NAMES = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  const EXERCISE_ROUTINE = {
+    0: 'Light walk / rest', 1: 'Chest and bicep', 2: 'Legs', 3: 'Back and tricep',
+    4: 'Legs (light)', 5: 'Abs and sprint', 6: 'Light walk / rest'
+  };
+  const EXERCISE_OPTIONS = {
+    0: ['30-min walk','45-min easy jog','Mobility + foam rolling','Light hike','Rest day'],
+    1: ['Bench + barbell curls','Incline DB press + hammer curls','Cable fly + preacher curls','Push-ups + 21s','Dips + concentration curls'],
+    2: ['Squat + leg press + calves','Deadlift + walking lunges','Front squat + leg extensions','Bulgarian split squat + leg curls','Goblet squat + hip thrusts'],
+    3: ['Pull-ups + skull crushers','Barbell row + tricep pushdowns','Lat pulldown + overhead extension','T-bar row + close-grip bench','Face pulls + rope pushdowns'],
+    4: ['Walking lunges + BW squats','KB swings + step-ups','Glute bridges + leg curls','Mobility flow + stretching','Bike + foam rolling'],
+    5: ['Plank + 100m sprints','Hanging leg raise + 400m repeats','Cable crunch + hill sprints','Russian twists + treadmill intervals','Dead bug + shuttle runs'],
+    6: ['30-min walk','45-min easy jog','Mobility + foam rolling','Light hike','Rest day']
+  };
+  const LIST_LIMITS = { papers: 100, ideas: 100, junkIdeas: 100, majorWork: 300 };
+
+  let state = { entries: {}, settings: { weightUnit: 'kg' }, currentEntry: null, currentDate: '' };
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function migrate(e) {
+    if (e.distanceKm === undefined) e.distanceKm = 0;
+    if (e.gymStartTime === undefined) e.gymStartTime = '18:00';
+    if (e.exerciseDuration === undefined) e.exerciseDuration = '00:00';
+    if (e.proteinGrams === undefined) e.proteinGrams = 0;
+    if (typeof e.majorWork === 'string') e.majorWork = e.majorWork ? [e.majorWork] : [];
+    if (!Array.isArray(e.majorWork)) e.majorWork = [];
+    return e;
+  }
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const p = JSON.parse(raw);
+        state.entries = p.entries || {};
+        Object.values(state.entries).forEach(migrate);
+        state.settings = p.settings || { weightUnit: 'kg' };
+      }
+    } catch (e) { console.warn('load fail', e); }
+  }
+  function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ entries: state.entries, settings: state.settings })); } catch (e) { toast('STORAGE FAIL'); } }
+
+  function todayStr() { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+  function parseDate(s) { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); }
+  function monthKey(s) { return s.slice(0,7); }
+  function currentMonthKey() { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}`; }
+  function previousMonthKey() { const d = new Date(); d.setDate(1); d.setMonth(d.getMonth()-1); return `${d.getFullYear()}-${pad(d.getMonth()+1)}`; }
+  function isEditable(s) { const e = parseDate(s); const l = new Date(e); l.setDate(l.getDate() + EDIT_LOCK_DAYS); l.setHours(23,59,59,999); return new Date() <= l; }
+  function formatDateLong(s) { return parseDate(s).toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' }); }
+  function formatDateShort(s) { return parseDate(s).toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' }); }
+  function suggestedRoutine(dateStr) { const d = parseDate(dateStr); return { day: DAY_NAMES[d.getDay()], text: EXERCISE_ROUTINE[d.getDay()], options: EXERCISE_OPTIONS[d.getDay()] }; }
+
+  function runPurge() {
+    const now = new Date(); const dom = now.getDate(); const hr = now.getHours(); const mn = now.getMinutes();
+    const past7th = (dom > 7) || (dom === 7 && (hr > 23 || (hr === 23 && mn >= 59)));
+    if (!past7th) return;
+    const cm = currentMonthKey(); let purged = 0;
+    for (const d of Object.keys(state.entries)) { if (monthKey(d) !== cm) { delete state.entries[d]; purged++; } }
+    if (purged > 0) save();
+  }
+
+  function checkPurgeBanner() {
+    const now = new Date(); const dom = now.getDate(); const pm = previousMonthKey();
+    if (dom <= 7) {
+      const hasPrev = Object.keys(state.entries).some(d => monthKey(d) === pm);
+      if (hasPrev) {
+        const pd = new Date(now.getFullYear(), now.getMonth(), 7, 23, 59);
+        const dl = Math.max(0, Math.ceil((pd - now) / 86400000));
+        return `<div class="banner pulse"><strong>⚠ PURGE WARNING //</strong> ${pm} data wipes on the 7th @ 23:59 — ${dl} day${dl===1?'':'s'} left. <strong>Export now.</strong></div>`;
+      }
+    }
+    return '';
+  }
+
+  function newEntry(d) { return migrate({ date: d, weight: 70.0, sleepTime: '23:00', wakeTime: '07:00', sleepHours: 8, screentime: '04:00', deepWorkHours: 0, mood: '', papers: [], majorWork: [], ideas: [], junkIdeas: [], distanceKm: 0, gymStartTime: '18:00', exerciseDuration: '00:00', proteinGrams: 0, updatedAt: Date.now() }); }
+  function getOrCreateEntry(d) { if (!state.entries[d]) state.entries[d] = newEntry(d); else migrate(state.entries[d]); return state.entries[d]; }
+
+  function to24h(h12, m, ap) { let h = parseInt(h12); if (ap==='AM' && h===12) h=0; else if (ap==='PM' && h!==12) h+=12; return `${pad(h)}:${pad(m)}`; }
+  function to12h(t) { const [h,m] = t.split(':').map(Number); const ap = h>=12?'PM':'AM'; let h12 = h%12; if (h12===0) h12=12; return { hour: h12, min: m, ampm: ap }; }
+  function computeSleepHours(st, wt) { const [sh,sm] = st.split(':').map(Number); const [wh,wm] = wt.split(':').map(Number); const s = sh*60+sm; let w = wh*60+wm; if (w <= s) w += 1440; return (w-s)/60; }
+
+  function populateTimeDropdowns() {
+    const hs = Array.from({length:12}, (_,i)=>i+1); const ms = [];
+    for (let i=0; i<60; i+=MINUTE_STEP) ms.push(i);
+    ['sleep-hour','wake-hour','gym-hour'].forEach(id => { document.getElementById(id).innerHTML = hs.map(h=>`<option value="${h}">${h}</option>`).join(''); });
+    ['sleep-min','wake-min','gym-min','dur-min'].forEach(id => { document.getElementById(id).innerHTML = ms.map(m=>`<option value="${m}">${pad(m)}</option>`).join(''); });
+    const sh = Array.from({length:24}, (_,i)=>i);
+    document.getElementById('screen-hour').innerHTML = sh.map(h=>`<option value="${h}">${pad(h)}</option>`).join('');
+    document.getElementById('screen-min').innerHTML = ms.map(m=>`<option value="${m}">${pad(m)}</option>`).join('');
+    const durHs = Array.from({length:11}, (_,i)=>i);
+    document.getElementById('dur-hour').innerHTML = durHs.map(h=>`<option value="${h}">${pad(h)}</option>`).join('');
+  }
+
+  function renderMoodGrid() {
+    const g = document.getElementById('mood-grid');
+    g.innerHTML = MOODS.map(m => `<button type="button" class="mood-opt" data-mood="${m}">${m}</button>`).join('');
+    g.addEventListener('click', (e) => {
+      const b = e.target.closest('.mood-opt'); if (!b || !state.currentEntry) return;
+      g.querySelectorAll('.mood-opt').forEach(x=>x.classList.remove('selected'));
+      b.classList.add('selected'); state.currentEntry.mood = b.dataset.mood; save();
+    });
+  }
+  function setSelectedMood(m) { document.querySelectorAll('.mood-opt').forEach(b=>b.classList.toggle('selected', b.dataset.mood===m)); }
+
+  function initSteppers() {
+    document.querySelectorAll('.stepper').forEach(st => {
+      const f = st.dataset.field; const mn = parseFloat(st.dataset.min); const mx = parseFloat(st.dataset.max);
+      const sp = parseFloat(st.dataset.step); const pr = parseInt(st.dataset.precision); const v = st.querySelector('.val');
+      st.addEventListener('click', (e) => {
+        const a = e.target.dataset.action; if (!a || !state.currentEntry) return;
+        let c = parseFloat(state.currentEntry[f]);
+        if (isNaN(c)) c = mn;
+        if (a==='inc') c = Math.min(mx, c+sp); else if (a==='dec') c = Math.max(mn, c-sp);
+        c = Math.round(c * Math.pow(10,pr)) / Math.pow(10,pr);
+        state.currentEntry[f] = c; v.value = c.toFixed(pr); save();
+      });
+      v.addEventListener('input', (e) => {
+        if (!state.currentEntry) return;
+        const raw = e.target.value;
+        if (raw === '' || raw === '.' || raw === '-' || raw === '-.') return;
+        const parsed = parseFloat(raw);
+        if (isNaN(parsed)) return;
+        state.currentEntry[f] = parsed; save();
+      });
+      v.addEventListener('blur', (e) => {
+        if (!state.currentEntry) return;
+        let cur = parseFloat(e.target.value);
+        if (isNaN(cur)) cur = mn;
+        cur = Math.max(mn, Math.min(mx, cur));
+        cur = Math.round(cur * Math.pow(10,pr)) / Math.pow(10,pr);
+        state.currentEntry[f] = cur;
+        e.target.value = cur.toFixed(pr);
+        save();
+      });
+      v.addEventListener('focus', (e) => { e.target.select(); });
+    });
+  }
+  function updateStepperDisplay(f, val) { document.querySelectorAll('.stepper').forEach(st => { if (st.dataset.field===f) { const p = parseInt(st.dataset.precision); st.querySelector('.val').value = Number(val).toFixed(p); } }); }
+
+  function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
+
+  function renderList(f) {
+    const c = document.getElementById(`${f}-list`); const items = state.currentEntry[f] || [];
+    const maxLen = LIST_LIMITS[f] || 100;
+    const useTextarea = f === 'majorWork';
+    c.innerHTML = items.map((v,i) => {
+      const inputEl = useTextarea
+        ? `<textarea maxlength="${maxLen}" data-field="${f}" data-idx="${i}" placeholder="// max ${maxLen} chars" rows="2">${escapeHtml(v)}</textarea>`
+        : `<input type="text" maxlength="${maxLen}" value="${escapeHtml(v)}" data-field="${f}" data-idx="${i}" placeholder="// max ${maxLen} chars">`;
+      return `<div class="list-item">${inputEl}<button type="button" class="btn-remove" data-field="${f}" data-idx="${i}" aria-label="remove">×</button></div>`;
+    }).join('');
+    c.querySelectorAll('input, textarea').forEach(inp => {
+      inp.addEventListener('input', (e) => { state.currentEntry[e.target.dataset.field][parseInt(e.target.dataset.idx)] = e.target.value; save(); });
+    });
+    c.querySelectorAll('.btn-remove').forEach(btn => {
+      btn.addEventListener('click', (e) => { const fld = e.currentTarget.dataset.field; state.currentEntry[fld].splice(parseInt(e.currentTarget.dataset.idx),1); renderList(fld); save(); });
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('.btn-add'); if (!b || !state.currentEntry) return;
+    const f = b.dataset.add; state.currentEntry[f].push(''); renderList(f); save();
+    const ins = document.querySelectorAll(`#${f}-list input, #${f}-list textarea`); if (ins.length) ins[ins.length-1].focus();
+  });
+
+  function renderSuggested(e) {
+    const sug = suggestedRoutine(e.date);
+    document.getElementById('suggested-day').textContent = `// ${sug.day} — ${sug.text.toUpperCase()}`;
+    document.getElementById('suggested-list').innerHTML = sug.options.map(o => `<li>${escapeHtml(o)}</li>`).join('');
+  }
+
+  function loadEntryIntoForm(e) {
+    state.currentEntry = e;
+    updateStepperDisplay('weight', e.weight);
+    updateStepperDisplay('deepWorkHours', e.deepWorkHours);
+    updateStepperDisplay('distanceKm', e.distanceKm || 0);
+    updateStepperDisplay('proteinGrams', e.proteinGrams || 0);
+    const s12 = to12h(e.sleepTime); document.getElementById('sleep-hour').value = s12.hour; document.getElementById('sleep-min').value = s12.min; document.getElementById('sleep-ampm').value = s12.ampm;
+    const w12 = to12h(e.wakeTime); document.getElementById('wake-hour').value = w12.hour; document.getElementById('wake-min').value = w12.min; document.getElementById('wake-ampm').value = w12.ampm;
+    const [sh,sm] = e.screentime.split(':').map(Number); document.getElementById('screen-hour').value = sh; document.getElementById('screen-min').value = sm;
+    const g12 = to12h(e.gymStartTime || '18:00'); document.getElementById('gym-hour').value = g12.hour; document.getElementById('gym-min').value = g12.min; document.getElementById('gym-ampm').value = g12.ampm;
+    const [dh,dm] = (e.exerciseDuration || '00:00').split(':').map(Number); document.getElementById('dur-hour').value = dh; document.getElementById('dur-min').value = dm;
+    renderSuggested(e);
+    setSelectedMood(e.mood); renderList('majorWork'); renderList('papers'); renderList('ideas'); renderList('junkIdeas'); updateSleepDerived();
+  }
+
+  function updateSleepDerived() {
+    if (!state.currentEntry) return;
+    const sh = parseInt(document.getElementById('sleep-hour').value); const sm = parseInt(document.getElementById('sleep-min').value); const sap = document.getElementById('sleep-ampm').value;
+    const wh = parseInt(document.getElementById('wake-hour').value); const wm = parseInt(document.getElementById('wake-min').value); const wap = document.getElementById('wake-ampm').value;
+    const s24 = to24h(sh,sm,sap); const w24 = to24h(wh,wm,wap);
+    const hrs = computeSleepHours(s24, w24);
+    document.getElementById('sleep-hours-derived').textContent = `// sleep duration: ${hrs.toFixed(1)} h`;
+    state.currentEntry.sleepTime = s24; state.currentEntry.wakeTime = w24; state.currentEntry.sleepHours = +hrs.toFixed(2); save();
+  }
+  function updateScreentime() { if (!state.currentEntry) return; const h = parseInt(document.getElementById('screen-hour').value); const m = parseInt(document.getElementById('screen-min').value); state.currentEntry.screentime = `${pad(h)}:${pad(m)}`; save(); }
+  function updateGymStartTime() { if (!state.currentEntry) return; const h = parseInt(document.getElementById('gym-hour').value); const m = parseInt(document.getElementById('gym-min').value); const ap = document.getElementById('gym-ampm').value; state.currentEntry.gymStartTime = to24h(h,m,ap); save(); }
+  function updateExerciseDuration() { if (!state.currentEntry) return; const h = parseInt(document.getElementById('dur-hour').value); const m = parseInt(document.getElementById('dur-min').value); state.currentEntry.exerciseDuration = `${pad(h)}:${pad(m)}`; save(); }
+
+  function commitEntry() {
+    if (!state.currentEntry) return; const e = state.currentEntry;
+    document.querySelectorAll('.stepper .val').forEach(v => v.blur());
+    updateSleepDerived(); updateScreentime(); updateGymStartTime(); updateExerciseDuration();
+    e.majorWork = e.majorWork.filter(s=>s.trim());
+    e.papers = e.papers.filter(s=>s.trim()); e.ideas = e.ideas.filter(s=>s.trim()); e.junkIdeas = e.junkIdeas.filter(s=>s.trim());
+    e.updatedAt = Date.now(); save();
+    renderList('majorWork'); renderList('papers'); renderList('ideas'); renderList('junkIdeas');
+    toast('ENTRY COMMITTED'); renderHistory(); renderStats(); renderExport();
+  }
+
+  function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast._h); toast._h = setTimeout(()=>t.classList.remove('show'), 1800); }
+
+  function renderHistory() {
+    const list = document.getElementById('history-list'); const ds = Object.keys(state.entries).sort().reverse();
+    if (ds.length === 0) { list.innerHTML = '<div class="empty-state">// NO ENTRIES YET //</div>'; return; }
+    list.innerHTML = ds.map(d => { const e = state.entries[d]; const ed = isEditable(d); const sh = e.sleepHours || computeSleepHours(e.sleepTime, e.wakeTime); return `<div class="history-item" data-date="${d}"><div class="history-date">${formatDateShort(d)}${!ed?'<span class="locked-pill">LOCKED</span>':''}</div><div class="history-meta">${e.mood||'—'} // ${(e.deepWorkHours||0).toFixed(1)}h deep // ${sh.toFixed(1)}h sleep // ${(e.weight||0).toFixed(1)}kg // ${(e.proteinGrams||0)}g protein</div><div class="history-detail" id="detail-${d}"></div></div>`; }).join('');
+    list.querySelectorAll('.history-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const d = el.dataset.date; const det = document.getElementById(`detail-${d}`);
+        if (det.classList.contains('open')) { det.classList.remove('open'); return; }
+        list.querySelectorAll('.history-detail.open').forEach(x=>x.classList.remove('open'));
+        det.innerHTML = renderEntryDetail(state.entries[d]); det.classList.add('open');
+      });
+    });
+  }
+
+  function renderEntryDetail(e) {
+    const kv = (k,v) => `<div class="kv"><span class="k">${k}</span><span class="v">${v||'—'}</span></div>`;
+    const lst = (t,items) => items && items.length ? `<div class="kv block"><span class="k">${t}</span><ul>${items.map(i=>`<li>${escapeHtml(i)}</li>`).join('')}</ul></div>` : '';
+    const s12 = to12h(e.sleepTime); const w12 = to12h(e.wakeTime);
+    const g12 = to12h(e.gymStartTime || '18:00');
+    const sug = suggestedRoutine(e.date);
+    const exerciseLine = `${g12.hour}:${pad(g12.min)} ${g12.ampm} for ${e.exerciseDuration || '00:00'}`;
+    return `${kv('WEIGHT', `${e.weight.toFixed(1)} kg`)}${kv('SLEEP', `${s12.hour}:${pad(s12.min)} ${s12.ampm} → ${w12.hour}:${pad(w12.min)} ${w12.ampm}`)}${kv('DURATION', `${(e.sleepHours||0).toFixed(1)} h`)}${kv('SCREENTIME', e.screentime)}${kv('DEEP WORK', `${e.deepWorkHours.toFixed(1)} h`)}${kv('MOOD', e.mood)}${kv('DISTANCE', `${(e.distanceKm||0).toFixed(1)} km`)}${kv('EXERCISE', exerciseLine)}${kv('PROTEIN', `${e.proteinGrams||0} g`)}${kv('ROUTINE', sug.text)}${lst('MAJOR WORK', e.majorWork)}${lst('PAPERS', e.papers)}${lst('IDEAS', e.ideas)}${lst('JUNK IDEAS', e.junkIdeas)}`;
+  }
+
+  function renderStats() {
+    const cur = currentMonthKey(); document.getElementById('stats-sub').textContent = `// ${cur} // CURRENT MONTH`;
+    const me = Object.values(state.entries).filter(e => monthKey(e.date)===cur); const c = document.getElementById('stats-content');
+    if (me.length === 0) { c.innerHTML = '<div class="empty-state">// NO DATA FOR CURRENT MONTH //</div>'; return; }
+    const n = me.length;
+    const avgSleep = me.reduce((s,e)=>s+(e.sleepHours||computeSleepHours(e.sleepTime,e.wakeTime)),0)/n;
+    const avgWeight = me.reduce((s,e)=>s+e.weight,0)/n;
+    const totalDeep = me.reduce((s,e)=>s+(e.deepWorkHours||0),0);
+    const tw = me.reduce((s,e)=>s+(e.majorWork||[]).length,0);
+    const tp = me.reduce((s,e)=>s+e.papers.length,0); const ti = me.reduce((s,e)=>s+e.ideas.length,0); const tj = me.reduce((s,e)=>s+e.junkIdeas.length,0);
+    const tsm = me.reduce((s,e)=>{ const [h,m]=e.screentime.split(':').map(Number); return s+h*60+m; },0);
+    const asc = tsm/n;
+    const totalKm = me.reduce((s,e)=>s+(e.distanceKm||0),0);
+    const totalExMin = me.reduce((s,e)=>{ const [h,m]=(e.exerciseDuration||'00:00').split(':').map(Number); return s+h*60+m; },0);
+    const workoutDays = me.filter(e => { const [h,m]=(e.exerciseDuration||'00:00').split(':').map(Number); return (h*60+m) > 0; }).length;
+    const totalProtein = me.reduce((s,e)=>s+(e.proteinGrams||0),0);
+    const avgProtein = totalProtein/n;
+    const mc = {}; MOODS.forEach(m=>mc[m]=0); me.forEach(e=>{ if(e.mood) mc[e.mood]=(mc[e.mood]||0)+1; });
+    const mmc = Math.max(1, ...Object.values(mc));
+    const now = new Date(); const dim = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+    c.innerHTML = `<div class="stat-grid">
+      <div class="stat-card"><div class="stat-label">Days logged</div><div class="stat-value">${n} / ${dim}</div><div class="stat-sub">${((n/dim)*100).toFixed(0)}% coverage</div></div>
+      <div class="stat-card"><div class="stat-label">Avg sleep</div><div class="stat-value">${avgSleep.toFixed(1)}h</div></div>
+      <div class="stat-card"><div class="stat-label">Avg weight</div><div class="stat-value">${avgWeight.toFixed(1)}</div><div class="stat-sub">kg</div></div>
+      <div class="stat-card"><div class="stat-label">Avg protein</div><div class="stat-value">${avgProtein.toFixed(0)}g</div><div class="stat-sub">${totalProtein}g total</div></div>
+      <div class="stat-card"><div class="stat-label">Deep-work total</div><div class="stat-value">${totalDeep.toFixed(1)}h</div><div class="stat-sub">${(totalDeep/n).toFixed(1)}h / day</div></div>
+      <div class="stat-card"><div class="stat-label">Avg screentime</div><div class="stat-value">${Math.floor(asc/60)}:${pad(Math.round(asc%60))}</div></div>
+      <div class="stat-card"><div class="stat-label">Workout days</div><div class="stat-value">${workoutDays} / ${n}</div><div class="stat-sub">${Math.floor(totalExMin/60)}h ${totalExMin%60}m total</div></div>
+      <div class="stat-card"><div class="stat-label">Total distance</div><div class="stat-value">${totalKm.toFixed(1)}</div><div class="stat-sub">km</div></div>
+      <div class="stat-card"><div class="stat-label">Work / Papers / Ideas / Junk</div><div class="stat-value" style="font-size:16px">${tw} / ${tp} / ${ti} / ${tj}</div></div>
+    </div>
+    <div class="section"><div class="section-label">MOOD DISTRIBUTION</div>${MOODS.map(m=>`<div class="mood-bar"><div class="lbl">${m}</div><div class="bar"><div class="fill" style="width:${(mc[m]/mmc)*100}%"></div></div><div class="count">${mc[m]}</div></div>`).join('')}</div>`;
+  }
+
+  let exportMonth = 'current';
+  function renderExport() {
+    const k = exportMonth==='current' ? currentMonthKey() : previousMonthKey();
+    const es = Object.values(state.entries).filter(e=>monthKey(e.date)===k).sort((a,b)=>a.date.localeCompare(b.date));
+    document.getElementById('export-area').value = buildSummary(es, k);
+  }
+  function buildSummary(entries, mk) {
+    if (entries.length === 0) return `// PERSONAL.GROWTH EXPORT\n// MONTH: ${mk}\n// NO ENTRIES`;
+    const n = entries.length;
+    const avgSleep = entries.reduce((s,e)=>s+(e.sleepHours||0),0)/n;
+    const avgWeight = entries.reduce((s,e)=>s+e.weight,0)/n;
+    const minW = Math.min(...entries.map(e=>e.weight)); const maxW = Math.max(...entries.map(e=>e.weight));
+    const totalDeep = entries.reduce((s,e)=>s+(e.deepWorkHours||0),0);
+    const tw = entries.reduce((s,e)=>s+(e.majorWork||[]).length,0);
+    const tp = entries.reduce((s,e)=>s+e.papers.length,0); const ti = entries.reduce((s,e)=>s+e.ideas.length,0); const tj = entries.reduce((s,e)=>s+e.junkIdeas.length,0);
+    const ts = entries.reduce((s,e)=>{ const [h,m]=e.screentime.split(':').map(Number); return s+h*60+m; },0); const asc = ts/n;
+    const totalKm = entries.reduce((s,e)=>s+(e.distanceKm||0),0);
+    const totalExMin = entries.reduce((s,e)=>{ const [h,m]=(e.exerciseDuration||'00:00').split(':').map(Number); return s+h*60+m; },0);
+    const workoutDays = entries.filter(e => { const [h,m]=(e.exerciseDuration||'00:00').split(':').map(Number); return (h*60+m) > 0; }).length;
+    const totalProtein = entries.reduce((s,e)=>s+(e.proteinGrams||0),0);
+    const avgProtein = totalProtein/n;
+    const mc = {}; MOODS.forEach(m=>mc[m]=0); entries.forEach(e=>{ if(e.mood) mc[e.mood]=(mc[e.mood]||0)+1; });
+    const payload = {
+      month: mk, entries_count: n,
+      summary: {
+        avg_sleep_hours: +avgSleep.toFixed(2),
+        avg_weight_kg: +avgWeight.toFixed(2),
+        weight_range_kg: [+minW.toFixed(1), +maxW.toFixed(1)],
+        weight_delta_kg: +(entries[entries.length-1].weight - entries[0].weight).toFixed(2),
+        avg_protein_g: +avgProtein.toFixed(1),
+        total_protein_g: totalProtein,
+        total_deep_work_hours: +totalDeep.toFixed(2),
+        avg_deep_work_hours: +(totalDeep/n).toFixed(2),
+        avg_screentime_minutes: Math.round(asc),
+        avg_screentime_hm: `${Math.floor(asc/60)}:${pad(Math.round(asc%60))}`,
+        total_distance_km: +totalKm.toFixed(2),
+        avg_distance_km: +(totalKm/n).toFixed(2),
+        total_exercise_minutes: totalExMin,
+        total_exercise_hm: `${Math.floor(totalExMin/60)}:${pad(totalExMin%60)}`,
+        workout_days: workoutDays,
+        workout_coverage: +(workoutDays/n).toFixed(2),
+        total_major_works: tw, total_papers: tp, total_ideas: ti, total_junk_ideas: tj,
+        mood_distribution: mc
+      },
+      entries: entries.map(e=>({ date: e.date, day_of_week: DAY_NAMES[parseDate(e.date).getDay()], weight_kg: e.weight, protein_g: e.proteinGrams||0, sleep_time: e.sleepTime, wake_time: e.wakeTime, sleep_hours: e.sleepHours, screentime: e.screentime, deep_work_hours: e.deepWorkHours, mood: e.mood, distance_km: e.distanceKm||0, gym_start_time: e.gymStartTime||'', exercise_duration: e.exerciseDuration||'00:00', routine: EXERCISE_ROUTINE[parseDate(e.date).getDay()], major_work: e.majorWork||[], papers: e.papers, ideas: e.ideas, junk_ideas: e.junkIdeas }))
+    };
+    let t = `// PERSONAL.GROWTH EXPORT // MONTH ${mk} // ${n} ENTRIES\n`;
+    t += `// AVG SLEEP ${avgSleep.toFixed(1)}h // AVG WEIGHT ${avgWeight.toFixed(1)}kg (Δ ${payload.summary.weight_delta_kg>=0?'+':''}${payload.summary.weight_delta_kg}kg) // AVG PROTEIN ${avgProtein.toFixed(0)}g\n`;
+    t += `// DEEP WORK ${totalDeep.toFixed(1)}h // WORKOUT ${workoutDays}/${n} DAYS // EXERCISE TOTAL ${payload.summary.total_exercise_hm} // DISTANCE ${totalKm.toFixed(1)}km\n`;
+    t += `// SCREENTIME AVG ${payload.summary.avg_screentime_hm} // WORKS ${tw} // PAPERS ${tp} // IDEAS ${ti} // JUNK ${tj}\n`;
+    t += `// MOOD: ${MOODS.filter(m=>mc[m]>0).map(m=>`${m}×${mc[m]}`).join(', ')||'—'}\n`;
+    t += `\n// ----- JSON PAYLOAD -----\n` + JSON.stringify(payload, null, 2);
+    return t;
+  }
+
+  function setupNav() {
+    document.querySelectorAll('.tab').forEach(t => {
+      t.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+        document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+        t.classList.add('active'); document.getElementById(`view-${t.dataset.view}`).classList.add('active');
+        if (t.dataset.view==='history') renderHistory();
+        if (t.dataset.view==='stats') renderStats();
+        if (t.dataset.view==='export') renderExport();
+        window.scrollTo(0,0);
+      });
+    });
+    document.querySelectorAll('[data-month]').forEach(b => {
+      b.addEventListener('click', () => { exportMonth = b.dataset.month; document.querySelectorAll('[data-month]').forEach(x=>x.classList.remove('active')); b.classList.add('active'); renderExport(); });
+    });
+    document.getElementById('btn-copy').addEventListener('click', async () => {
+      const text = document.getElementById('export-area').value;
+      try { await navigator.clipboard.writeText(text); toast('COPIED'); } catch(e) { document.getElementById('export-area').select(); toast('SELECT + COPY MANUALLY'); }
+    });
+  }
+
+  function init() {
+    load(); runPurge();
+    const today = todayStr(); state.currentDate = today;
+    document.getElementById('today-date').textContent = formatDateLong(today).toUpperCase();
+    document.getElementById('today-sub').textContent = `// ${today} // TAP TO LOG`;
+    document.getElementById('banner-container').innerHTML = checkPurgeBanner();
+    populateTimeDropdowns(); renderMoodGrid(); initSteppers(); setupNav();
+    const e = getOrCreateEntry(today); loadEntryIntoForm(e);
+    ['sleep-hour','sleep-min','sleep-ampm','wake-hour','wake-min','wake-ampm'].forEach(id => document.getElementById(id).addEventListener('change', updateSleepDerived));
+    ['screen-hour','screen-min'].forEach(id => document.getElementById(id).addEventListener('change', updateScreentime));
+    ['gym-hour','gym-min','gym-ampm'].forEach(id => document.getElementById(id).addEventListener('change', updateGymStartTime));
+    ['dur-hour','dur-min'].forEach(id => document.getElementById(id).addEventListener('change', updateExerciseDuration));
+    document.getElementById('entry-form').addEventListener('submit', (e) => { e.preventDefault(); commitEntry(); });
+    renderHistory(); renderStats(); renderExport();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+
+  // Service worker — makes this a true installable PWA with offline support
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch((err) => console.warn('SW register fail', err));
+    });
+  }
+</script>
+</body>
+</html>
